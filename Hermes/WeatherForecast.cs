@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.SignalR;
+
 namespace Hermes;
 
 public class WeatherForecast
