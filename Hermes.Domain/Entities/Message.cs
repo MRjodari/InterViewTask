@@ -12,5 +12,7 @@ namespace Hermes.Domain.Entities
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime Created { get; set; }
+        public bool IsProcess { get; set; }
+        public bool IsSent { get; set; }
     }
 }

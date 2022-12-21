@@ -17,7 +17,15 @@ namespace Hermes.Persistence.Interfaces.Contexts
 
         }
         public DbSet<User> Users { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        //public DbSet<Message> Messages { get; set; }
         public DbSet<UserMessage> UserMessages { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .Property(p => p.DeviceIdentifier).IsRequired();
+
+            //modelBuilder.Entity<UserMessage>().HasQueryFilter(p => !p.MessageId);
+        }
     }
 }
