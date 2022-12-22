@@ -1,9 +1,12 @@
+using Hermes.API.Extensions;
 using Hermes.Application.Interfaces.Repos;
 using Hermes.Application.Services.NotificationSender;
 using Hermes.Persistence.Contexts;
 using Hermes.Persistence.Repositories;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +38,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
+app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>());
+
 
 app.UseHttpsRedirection();
 

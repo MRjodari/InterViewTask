@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Hermes.Application.Common
 {
-    public class ErrorCodes
+    public enum ErrorMessage
     {
+        NotFound,
+        ReminedUsersEmpty
 
     }
 }

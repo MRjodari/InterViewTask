@@ -22,16 +22,13 @@ namespace Hermes.API.Controllers
 
 
         [HttpPost("send_notification")]
-        public IActionResult Post([FromQuery] MessageDto messageDto)
+        public async Task<IActionResult> Post([FromQuery] MessageDto messageDto)
         {
             if(messageDto == null)
             { return NotFound(); }
-            var result =  _pushNotificationProviderService.SendToAllUserAsync(messageDto.MessageContent.ToString());
-            if (result == null)
-            {
-                return NotFound();
-            }
-            return Ok(result);
+            await _pushNotificationProviderService.SendToAllUserAsync(messageDto.MessageContent.ToString());
+            
+            return Ok();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Hermes.Application.Services.NotificationSender
         //IGenericRepository<IUserMessageRepository> _userMessageRepository { get; }
         Guid[] GetRemainedUser();
         Task Send(Guid deviceIdentifier, string payload);
-        Task  SendToAllUserAsync(string payload);
+        Task SendToAllUserAsync(string payload);
 
     }
 
@@ -42,22 +42,21 @@ namespace Hermes.Application.Services.NotificationSender
         /// <param name="payload">
         /// message content
         /// </param>
-        public  Guid[] GetRemainedUser()
+        public Guid[] GetRemainedUser()
         {
             var AllUsers = (IEnumerable<User>)_unitOfWork.UserRepository.GetAll().Result;
-            var AllSentMessageUsers = (IEnumerable<UserMessage>) _unitOfWork.UserMessageRepository.GetAll().Result;
+            var AllSentMessageUsers = (IEnumerable<UserMessage>)_unitOfWork.UserMessageRepository.GetAll().Result;
 
-             
             var RemainedUser = AllUsers.Select(s1 => s1.DeviceIdentifier).Except(AllSentMessageUsers.Select(s2 => s2.UserId)).ToArray();
             return RemainedUser;
-            
+
         }
-        
+
         public async Task Send(Guid deviceIdentifier, string payload)
         {
             // insert in user message table
-            await  _unitOfWork.UserMessageRepository.Add(new UserMessage { UserId = deviceIdentifier });
-           await  _unitOfWork.Save();
+            await _unitOfWork.UserMessageRepository.Add(new UserMessage { UserId = deviceIdentifier });
+            await _unitOfWork.Save();
             await Task.Delay(100);
         }
 
@@ -71,7 +70,10 @@ namespace Hermes.Application.Services.NotificationSender
                     await Send(item, payload);
                 }
             }
-            //return Task.Delay(10);
+            else
+            {
+                throw new Exception(ErrorMessage.ReminedUsersEmpty.ToString());
+            }
         }
     }
 }
