@@ -1,6 +1,7 @@
 ﻿using Hermes.Application.Interfaces.Contexts;
-using Hermes.Application.Values;
 using Hermes.Domain.Entities;
+using Hermes.Persistence.Config;
+using Hermes.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hermes.Persistence.Interfaces.Contexts
+namespace Hermes.Persistence.Contexts
 {
     public class AppDbContext : DbContext, IAppDbContext
     {
@@ -22,8 +23,12 @@ namespace Hermes.Persistence.Interfaces.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .Property(p => p.DeviceIdentifier).IsRequired();
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserMessageEntityConfiguration());
+
+            modelBuilder.Seed();
 
             //modelBuilder.Entity<UserMessage>().HasQueryFilter(p => !p.MessageId);
         }

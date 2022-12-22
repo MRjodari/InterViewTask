@@ -1,6 +1,6 @@
 ﻿using Hermes.Application.Interfaces.Repos;
 using Hermes.Domain.Entities;
-using Hermes.Persistence.Interfaces.Contexts;
+using Hermes.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Hermes.Persistence.Repositories
 {
-    public class UserRepository : GenericRepository<User> , IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
         public UserRepository(AppDbContext context) : base(context)
-    {
+        {
+        }
     }
-}
 }

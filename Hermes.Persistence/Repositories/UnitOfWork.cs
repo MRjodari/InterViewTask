@@ -1,5 +1,5 @@
 ﻿using Hermes.Application.Interfaces.Repos;
-using Hermes.Persistence.Interfaces.Contexts;
+using Hermes.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,23 +10,26 @@ namespace Hermes.Persistence.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly AppDbContext context;
+
+        private readonly AppDbContext _context;
+        private IUserRepository _userRepository;
+        private IUserMessageRepository _userMessageRepository;
+        public IUserRepository UserRepository => _userRepository ??= new UserRepository(_context);
+        public IUserMessageRepository UserMessageRepository => _userMessageRepository ??= new UserMessageRepository(_context);
         public UnitOfWork(AppDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
-        public IUserRepository CustomerRepository => throw new NotImplementedException();
-
         //public IMessageRepository MessageRepository => throw new NotImplementedException();
 
-        public async void Dispose()
+        public void Dispose()
         {
-            await context.DisposeAsync();
+             _context.DisposeAsync();
         }
 
         public async Task Save()
         {
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Hermes.Application.Interfaces.Repos
 {
     public interface IUnitOfWork : IDisposable
     {
-        IUserRepository CustomerRepository { get; }
+        IUserRepository UserRepository { get; }
+        IUserMessageRepository UserMessageRepository { get; }
         //IMessageRepository MessageRepository { get; }
 
         Task Save();

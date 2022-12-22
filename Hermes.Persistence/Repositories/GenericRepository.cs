@@ -1,4 +1,5 @@
-﻿using Hermes.Persistence.Interfaces.Contexts;
+﻿using Hermes.Application.Interfaces.Repos;
+using Hermes.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hermes.Application.Interfaces.Repos
+namespace Hermes.Persistence.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
@@ -31,7 +32,7 @@ namespace Hermes.Application.Interfaces.Repos
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetById(long id)
+        public async Task<T> GetById(Guid id)
         {
             return await _context.Set<T>().FindAsync(id);
         }

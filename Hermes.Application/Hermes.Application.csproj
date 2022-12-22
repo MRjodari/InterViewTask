@@ -7,7 +7,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Services\UserMessages\**" />
+	  <Compile Remove="Services\Users\**" />
+	  <EmbeddedResource Remove="Services\UserMessages\**" />
+	  <EmbeddedResource Remove="Services\Users\**" />
+	  <None Remove="Services\UserMessages\**" />
+	  <None Remove="Services\Users\**" />
+	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
 	</ItemGroup>
 

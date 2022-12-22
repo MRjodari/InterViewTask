@@ -1,5 +1,4 @@
-﻿using Hermes.Application.Values;
-using Hermes.Domain.Entities;
+﻿using Hermes.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
