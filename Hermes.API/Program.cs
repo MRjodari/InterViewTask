@@ -1,5 +1,6 @@
 using Hermes.API.Extensions;
 using Hermes.Application.Interfaces.Repos;
+using Hermes.Application.Services.BackGroundProcess;
 using Hermes.Application.Services.NotificationSender;
 using Hermes.Persistence.Contexts;
 using Hermes.Persistence.Repositories;
@@ -27,7 +28,7 @@ builder.Services.AddScoped<IUserMessageRepository, UserMessageRepository>();
 builder.Services.AddScoped<IPushNotificationProviderService, PushNotificationProviderService>();
 //builder.Services.AddScoped<IMessageRepository, MessageRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.AddScoped<ISendJobService,SendJobService>();
 builder.Services.AddDbContext<AppDbContext>(option =>
                     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

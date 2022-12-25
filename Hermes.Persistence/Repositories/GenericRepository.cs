@@ -40,6 +40,7 @@ namespace Hermes.Persistence.Repositories
         public async Task Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
+
         }
     }
 }

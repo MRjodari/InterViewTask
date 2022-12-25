@@ -14,11 +14,15 @@ namespace Hermes.Application.Services.NotificationSender
         //IUnitOfWork _unitOfWork { get; }
         //IGenericRepository<IUserRepository> _userRepository { get; }
         //IGenericRepository<IUserMessageRepository> _userMessageRepository { get; }
-        Task<bool> GetAllUser(String Content);
-
-        Guid[] GetRemainedUser();
+        Task<Guid[]> GetAllUser(String Content);
+        Task<Guid[]> GetRemainedUser();
+        Task<bool> AddRemainedUser(string message);
+        Task<bool> ModifyUserMessage(Guid deviceId, string message);
         Task Send(Guid deviceIdentifier, string payload);
         Task SendToAllUserAsync(string payload);
+
+        Task AutoCompleteSending(CancellationToken cancellationToken);
+        Task AutoCancelUnCompletedSending(CancellationToken cancellationToken);
 
     }
 
@@ -45,46 +49,149 @@ namespace Hermes.Application.Services.NotificationSender
         /// message content
         /// </param>
 
-        public async Task<bool> GetAllUser(String message)
+        public async Task<Guid[]> GetAllUser(String Content)
         {
-            
+            Guid[] AllUsers = (await _unitOfWork.UserRepository.GetAll()).Select(s1 => s1.DeviceIdentifier).ToArray();
 
-            return true;
+            //foreach (var item in AllUsers.ToList().Select(s1 => s1.DeviceIdentifier))
+            //{
+            //    await _unitOfWork.UserMessageRepository
+            //                        .Add(new UserMessage { DeviceId = item, Content = message, Status = false });
+            //}
+            int AllUserCout = AllUsers.Count();
+
+            return AllUsers;
 
         }
 
-        public Guid[] GetRemainedUser()
+        public async Task<Guid[]> GetRemainedUser()
         {
-            var AllUsers = (IEnumerable<User>)_unitOfWork.UserRepository.GetAll().Result;
-            var AllSentMessageUsers = (IEnumerable<UserMessage>)_unitOfWork.UserMessageRepository.GetAll().Result;
+            var AllUsers = (await _unitOfWork.UserRepository.GetAll()).ToArray();
+            var AllSentMessageUsers = (await _unitOfWork.UserMessageRepository.GetAll()).ToArray();
 
             var RemainedUser = AllUsers.Select(s1 => s1.DeviceIdentifier).Except(AllSentMessageUsers.Select(s2 => s2.DeviceId)).ToArray();
             return RemainedUser;
-
         }
+
+
+        public async Task<bool> AddRemainedUser(string message)
+        {
+            bool result = false;
+            try
+            {
+                var ReminedUsers = await GetRemainedUser();
+                if (ReminedUsers.Any())
+                {
+                    foreach (var item in ReminedUsers)
+                    {
+                        await _unitOfWork.UserMessageRepository
+                            .Add(new UserMessage
+                            {
+                                DeviceId = item,
+                                Content = message,
+                                Status = false
+                            });
+                        _unitOfWork.Save();
+                    }
+                    result = true;
+                }
+
+            }
+            catch
+            {
+                throw new Exception(ErrorMessage.ReminedUsersEmpty.ToString());
+
+            }
+            return result;
+        }
+
+        public async Task<bool> ModifyUserMessage(Guid deviceId, string message)
+        {
+            
+            var userMessageFound = await _unitOfWork.UserMessageRepository.GetById(deviceId);
+            userMessageFound.Status = true;
+            
+            bool result = false;
+            try
+            {
+                await _unitOfWork.UserMessageRepository.Update(userMessageFound);
+                //new UserMessage
+                //{
+                //    DeviceId = deviceId,
+                //    Content = message,
+                //    Status = true
+                //});
+
+                result = true;
+            }
+            catch
+            {
+                throw new Exception(ErrorMessage.NotFound.ToString());
+
+            }
+            return result;
+        }
+
 
         public async Task Send(Guid deviceIdentifier, string payload)
         {
             // insert in user message table
-            await _unitOfWork.UserMessageRepository.Add(new UserMessage { DeviceId = deviceIdentifier });
-            await _unitOfWork.Save();
+            //await _unitOfWork.UserMessageRepository.Add(new UserMessage { DeviceId = deviceIdentifier });
+            if (await ModifyUserMessage(deviceIdentifier, payload))
+            {
+                await _unitOfWork.Save();
+            }
             await Task.Delay(100);
         }
 
         public async Task SendToAllUserAsync(string payload)
         {
-            var ReminedUsers = GetRemainedUser();
-            if (ReminedUsers.Any())
+            var waitingUsers = await _unitOfWork.UserMessageRepository.GetAll();
+            var users = await _unitOfWork.UserRepository.GetAll();
+            if (users.Any())
             {
-                foreach (var item in ReminedUsers)
+                if (waitingUsers.Count() < users.Count())
                 {
-                    await Send(item, payload);
+                    await AddRemainedUser(payload);
+                    waitingUsers = await _unitOfWork.UserMessageRepository.GetAll();
                 }
+
+                if (waitingUsers.Select(p => p.Status == false).Any())
+                {
+                    foreach (var item in waitingUsers.Select(s1 => s1.DeviceId))
+                    {
+                        await Send(item, payload);
+                    }
+                }
+                //else
+                //{
+                //    throw new Exception(ErrorMessage.ReminedUsersEmpty.ToString());
+                //}
+
             }
             else
             {
-                throw new Exception(ErrorMessage.ReminedUsersEmpty.ToString());
+                throw new Exception(ErrorMessage.UsersEmpty.ToString());
+
             }
         }
+
+
+        public async Task AutoCompleteSending(CancellationToken cancellationToken)
+
+        {
+            var waitingUsers = await _unitOfWork.UserMessageRepository.GetAll();
+            //var users = await _unitOfWork.UserRepository.GetAll();
+            if (waitingUsers.Any())
+            {
+                var messageContent = waitingUsers.Select(c1 => c1.Content).FirstOrDefault();
+                await SendToAllUserAsync(messageContent);
+            }
+        }
+        public async Task AutoCancelUnCompletedSending(CancellationToken cancellationToken)
+        {
+
+        }
     }
+
 }
