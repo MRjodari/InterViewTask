@@ -14,6 +14,8 @@ namespace Hermes.Application.Services.NotificationSender
         //IUnitOfWork _unitOfWork { get; }
         //IGenericRepository<IUserRepository> _userRepository { get; }
         //IGenericRepository<IUserMessageRepository> _userMessageRepository { get; }
+        Task<bool> GetAllUser(String Content);
+
         Guid[] GetRemainedUser();
         Task Send(Guid deviceIdentifier, string payload);
         Task SendToAllUserAsync(string payload);
@@ -42,12 +44,21 @@ namespace Hermes.Application.Services.NotificationSender
         /// <param name="payload">
         /// message content
         /// </param>
+
+        public async Task<bool> GetAllUser(String message)
+        {
+            
+
+            return true;
+
+        }
+
         public Guid[] GetRemainedUser()
         {
             var AllUsers = (IEnumerable<User>)_unitOfWork.UserRepository.GetAll().Result;
             var AllSentMessageUsers = (IEnumerable<UserMessage>)_unitOfWork.UserMessageRepository.GetAll().Result;
 
-            var RemainedUser = AllUsers.Select(s1 => s1.DeviceIdentifier).Except(AllSentMessageUsers.Select(s2 => s2.UserId)).ToArray();
+            var RemainedUser = AllUsers.Select(s1 => s1.DeviceIdentifier).Except(AllSentMessageUsers.Select(s2 => s2.DeviceId)).ToArray();
             return RemainedUser;
 
         }
@@ -55,7 +66,7 @@ namespace Hermes.Application.Services.NotificationSender
         public async Task Send(Guid deviceIdentifier, string payload)
         {
             // insert in user message table
-            await _unitOfWork.UserMessageRepository.Add(new UserMessage { UserId = deviceIdentifier });
+            await _unitOfWork.UserMessageRepository.Add(new UserMessage { DeviceId = deviceIdentifier });
             await _unitOfWork.Save();
             await Task.Delay(100);
         }

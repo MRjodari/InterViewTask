@@ -30,9 +30,9 @@ namespace Hermes.Tests.Mocks.UserMock
 
             var UserMessages = new List<UserMessage>
             {
-                    new UserMessage { Id = Guid.NewGuid(), UserId = guid1},
-                    new UserMessage { Id = Guid.NewGuid(), UserId = guid2},
-                    new UserMessage { Id = Guid.NewGuid(), UserId = guid3},
+                    new UserMessage { DeviceId = guid1, Content = "TestContent",Status=false},
+                    new UserMessage { DeviceId = guid2, Content = "TestContent",Status=false},
+                    new UserMessage { DeviceId = guid3, Content = "TestContent",Status=false},
 
             };
 
@@ -64,11 +64,11 @@ namespace Hermes.Tests.Mocks.UserMock
 
             });
 
-            
+
 
             return mockRepo;
 
         }
-        
+
     }
 }
