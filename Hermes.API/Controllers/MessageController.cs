@@ -2,6 +2,7 @@
 using Hermes.Application.Services.NotificationSender;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
 namespace Hermes.API.Controllers
@@ -22,6 +23,11 @@ namespace Hermes.API.Controllers
 
 
         [HttpPost("send_notification")]
+        [SwaggerOperation(
+      Summary = "Send Notification",
+      Description = "Send Notification Synchronous",
+      OperationId = "SendToAllUserAsync.Send",
+      Tags = new[] { "MessageController" })]
         public async Task<IActionResult> Post([FromQuery] MessageDto messageDto)
         {
             if(messageDto == null)
