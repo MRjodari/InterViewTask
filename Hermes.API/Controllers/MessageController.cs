@@ -25,7 +25,7 @@ namespace Hermes.API.Controllers
         public async Task<IActionResult> Post([FromQuery] MessageDto messageDto)
         {
             if(messageDto == null)
-            { return NotFound(); }
+            { return NoContent(); }
             await _pushNotificationProviderService.SendToAllUserAsync(messageDto.MessageContent.ToString());
             
             return Ok();
