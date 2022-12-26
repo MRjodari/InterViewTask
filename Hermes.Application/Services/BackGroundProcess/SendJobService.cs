@@ -5,38 +5,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hermes.Application.Services.BackGroundProcess
 {
-    
-    public interface ISendJobService
+    public class SendJobService : BackgroundService, IHostedService
     {
-        Task StartAsync(CancellationToken cancellationToken);
-        Task StopAsync(CancellationToken cancellationToken);
-        Task CompleteSending(object state);
-    }
-
-
-    public class SendJobService : IHostedService, IDisposable, ISendJobService
-    {
-        public Task CompleteSending(object state)
+        private Timer _timer;
+        public IServiceScopeFactory _serviceScopeFactory;
+        public SendJobService(IServiceScopeFactory serviceScopeFactory)
         {
-            throw new NotImplementedException();
+            _serviceScopeFactory = serviceScopeFactory;
+        }
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var scoped = scope.ServiceProvider.GetRequiredService<IPushNotificationProviderService>();
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    await scoped.AutoCompleteSending(CancellationToken.None);
+                    Task.Delay(300000);
+                }
+            }
+            //return Task.CompletedTask;
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
