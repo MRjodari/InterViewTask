@@ -11,7 +11,7 @@ namespace Hermes.Application.Services.NotificationSender
 {
     public interface IPushNotificationProviderService
     {
-        Task<Guid[]> GetAllUser(String Content);
+        Task<Guid[]> GetAllUser();
         Task<Guid[]> GetRemainedUser();
         Task<bool> AddRemainedUser(string message);
         Task<bool> ModifyUserMessage(Guid deviceId, string message);
@@ -34,38 +34,18 @@ namespace Hermes.Application.Services.NotificationSender
 
 
         /// <summary>
-        /// this method is going to send a notification to a user's device
+        /// this method is going to get allUsers's DeviceId
         /// </summary>
-        /// <param name="deviceIdentifier">
-        /// each user provides this property when registering
-        /// </param>
-        /// <param name="payload">
-        /// message content
-        /// </param>
-
-        public async Task<Guid[]> GetAllUser(String Content)
+        public async Task<Guid[]> GetAllUser()
         {
             Guid[] AllUsers = (await _unitOfWork.UserRepository.GetAll()).Select(s1 => s1.DeviceIdentifier).ToArray();
-
-            //foreach (var item in AllUsers.ToList().Select(s1 => s1.DeviceIdentifier))
-            //{
-            //    await _unitOfWork.UserMessageRepository
-            //                        .Add(new UserMessage { DeviceId = item, Content = message, Status = false });
-            //}
             int AllUserCout = AllUsers.Count();
 
             return AllUsers;
-
         }
         // <summary>
         /// this method is going to Get Remained user who they didn't push to message queue 
         /// </summary>
-        /// <param name="deviceId">
-        /// each user provides this property when registering
-        /// </param>
-        /// <param name="message">
-        /// message content
-        /// </param>
         public async Task<Guid[]> GetRemainedUser()
         {
             var AllUsers = (await _unitOfWork.UserRepository.GetAll()).ToArray();
