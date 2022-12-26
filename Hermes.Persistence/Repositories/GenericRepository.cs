@@ -30,6 +30,12 @@ namespace Hermes.Persistence.Repositories
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
+
+
+        }
+        public async Task<IEnumerable<T>> GetUndeiveredUsers()
+        {
+            return (IEnumerable<T>)await _context.UserMessages.Where(p => p.Status == false).ToListAsync();
         }
 
         public async Task<T> GetById(Guid id)

@@ -107,21 +107,14 @@ namespace Hermes.Application.Services.NotificationSender
 
         public async Task<bool> ModifyUserMessage(Guid deviceId, string message)
         {
-            
+
             var userMessageFound = await _unitOfWork.UserMessageRepository.GetById(deviceId);
             userMessageFound.Status = true;
-            
+
             bool result = false;
             try
             {
                 await _unitOfWork.UserMessageRepository.Update(userMessageFound);
-                //new UserMessage
-                //{
-                //    DeviceId = deviceId,
-                //    Content = message,
-                //    Status = true
-                //});
-
                 result = true;
             }
             catch
@@ -136,7 +129,6 @@ namespace Hermes.Application.Services.NotificationSender
         public async Task Send(Guid deviceIdentifier, string payload)
         {
             // insert in user message table
-            //await _unitOfWork.UserMessageRepository.Add(new UserMessage { DeviceId = deviceIdentifier });
             if (await ModifyUserMessage(deviceIdentifier, payload))
             {
                 await _unitOfWork.Save();
@@ -146,28 +138,25 @@ namespace Hermes.Application.Services.NotificationSender
 
         public async Task SendToAllUserAsync(string payload)
         {
-            var waitingUsers = await _unitOfWork.UserMessageRepository.GetAll();
+            var currentUserMessages = await _unitOfWork.UserMessageRepository.GetAll();
             var users = await _unitOfWork.UserRepository.GetAll();
             if (users.Any())
             {
-                if (waitingUsers.Count() < users.Count())
+                if (currentUserMessages.Count() < users.Count())
                 {
                     await AddRemainedUser(payload);
-                    waitingUsers = await _unitOfWork.UserMessageRepository.GetAll();
-                }
 
-                if (waitingUsers.Select(p => p.Status == false).Any())
+                }
+                var waitingUsers = await _unitOfWork.UserMessageRepository.GetUndeiveredUsers();
+
+
+                foreach (var item in waitingUsers.Select(s1 => s1.DeviceId))
                 {
-                    foreach (var item in waitingUsers.Select(s1 => s1.DeviceId))
-                    {
+                    
                         await Send(item, payload);
-                    }
+                    
                 }
-                //else
-                //{
-                //    throw new Exception(ErrorMessage.ReminedUsersEmpty.ToString());
-                //}
-
+                
             }
             else
             {

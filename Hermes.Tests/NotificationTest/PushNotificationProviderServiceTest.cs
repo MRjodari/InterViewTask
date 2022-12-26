@@ -35,7 +35,8 @@ namespace Hermes.Tests.NotificationTest
             var service = new PushNotificationProviderService(_unitOfWork.Object);
             var RemainedUser = service.GetRemainedUser();
             // Assert
-            RemainedUser.Length.ShouldBe(2);
+            //RemainedUser.Length.ShouldBe(2);
+            RemainedUser.Result.Length.ShouldBe(2);
             
         }
     }

@@ -25,10 +25,18 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserMessageRepository, UserMessageRepository>();
+//
 builder.Services.AddScoped<IPushNotificationProviderService, PushNotificationProviderService>();
 //builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+
+//builder.Services.AddHostedService<WorkerService>();
+//builder.Services.AddScoped<WorkerService>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ISendJobService,SendJobService>();
+//
+builder.Services.AddHostedService<SendJobService>();
+builder.Services.AddScoped<ISendJobService, SendJobService>();
+
 builder.Services.AddDbContext<AppDbContext>(option =>
                     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
