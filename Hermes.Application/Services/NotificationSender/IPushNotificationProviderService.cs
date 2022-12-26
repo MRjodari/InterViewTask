@@ -127,20 +127,22 @@ namespace Hermes.Application.Services.NotificationSender
         {
 
             var userMessageFound = await _unitOfWork.UserMessageRepository.GetById(deviceId);
-            userMessageFound.Status = true;
-
-            bool result = false;
-            try
+            if (userMessageFound.Status == false)
             {
-                await _unitOfWork.UserMessageRepository.Update(userMessageFound);
-                result = true;
-            }
-            catch
-            {
-                throw new Exception(ErrorMessage.NotFound.ToString());
+                bool result = false;
+                try
+                {
+                    await _unitOfWork.UserMessageRepository.Update(userMessageFound);
+                    result = true;
+                }
+                catch
+                {
+                    throw new Exception(ErrorMessage.NotFound.ToString());
 
+                }
+                return result;
             }
-            return result;
+            return true;
         }
 
         /// <summary>
