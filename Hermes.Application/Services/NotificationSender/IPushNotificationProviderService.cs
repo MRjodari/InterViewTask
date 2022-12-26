@@ -132,6 +132,7 @@ namespace Hermes.Application.Services.NotificationSender
                 bool result = false;
                 try
                 {
+                    userMessageFound.Status = true;
                     await _unitOfWork.UserMessageRepository.Update(userMessageFound);
                     result = true;
                 }
