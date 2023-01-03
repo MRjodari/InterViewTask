@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.API", "Hermes.API\He
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{33F6DC56-F588-4D3D-89F1-91E32A80FE46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hermes.Tests", "Hermes.Tests\Hermes.Tests.csproj", "{B908BB9A-9931-4E6C-B42F-A10C57DB64C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hermes.Tests", "Hermes.Tests\Hermes.Tests.csproj", "{B908BB9A-9931-4E6C-B42F-A10C57DB64C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

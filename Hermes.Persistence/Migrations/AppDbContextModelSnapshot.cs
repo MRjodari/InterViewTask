@@ -51,133 +51,140 @@ namespace Hermes.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a2b8fc54-1e16-4bff-bf68-7f9aef177796"),
-                            DeviceIdentifier = new Guid("1fc1571d-3890-43ed-9392-fe14a721c8f0"),
+                            Id = new Guid("36fadeb8-2dcc-4b0a-8ea8-e7ec071c25f7"),
+                            DeviceIdentifier = new Guid("49c2ea60-789c-457b-8e03-70c60097d9d5"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2366),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(736),
                             UserName = "Mora"
                         },
                         new
                         {
-                            Id = new Guid("c3b4483e-96b8-412d-b892-f2a0b22aee67"),
-                            DeviceIdentifier = new Guid("cc2d6986-5d65-47ff-ac28-b03e5ecddd49"),
+                            Id = new Guid("38aa2230-9ffc-4375-8b07-c9e08bfaf829"),
+                            DeviceIdentifier = new Guid("aa6588e0-818b-496c-b10f-2f6953bdd46c"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2384),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(753),
                             UserName = "Ali"
                         },
                         new
                         {
-                            Id = new Guid("35227a66-40f5-4c85-b11e-934b55e23117"),
-                            DeviceIdentifier = new Guid("f7eacefa-39aa-4a3e-9cb6-76bec7fa4dff"),
+                            Id = new Guid("92b49dc0-ecb6-4888-b996-baaded0c9627"),
+                            DeviceIdentifier = new Guid("4610790d-c36b-468f-9894-e80d27d611e8"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2386),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(756),
                             UserName = "Mehran"
                         },
                         new
                         {
-                            Id = new Guid("6bae5770-fdd9-4c66-85f2-c0dadd4ab6aa"),
-                            DeviceIdentifier = new Guid("829e3cdc-78a3-4a3d-b1b5-c86a7f901fa4"),
+                            Id = new Guid("64bfc194-9ad2-45d6-b3b8-8aedad21d52e"),
+                            DeviceIdentifier = new Guid("a946daaf-e128-4e19-8690-dbccb568986e"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2389),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(758),
                             UserName = "Babak"
                         },
                         new
                         {
-                            Id = new Guid("e7943c96-8efb-4913-b50b-bf22b6f80f6c"),
-                            DeviceIdentifier = new Guid("e9dc547c-7ea8-4113-a0b2-560c7de8d564"),
+                            Id = new Guid("bad1e3e6-60d5-4610-b017-2b63ab6341e6"),
+                            DeviceIdentifier = new Guid("e413ab3e-c937-40cb-98d2-f70e0bc5b947"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2391),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(765),
                             UserName = "Sara"
                         },
                         new
                         {
-                            Id = new Guid("0cde848b-ca31-4710-b30e-886a94957a87"),
-                            DeviceIdentifier = new Guid("1d9e9ea6-1e63-4553-95ac-efea8fba263c"),
+                            Id = new Guid("ec88ef4e-77ea-44da-947f-1dc76f9fd4bd"),
+                            DeviceIdentifier = new Guid("b93a51d7-a661-4898-ac70-76c0f2aa1275"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2399),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(768),
                             UserName = "Ahad"
                         },
                         new
                         {
-                            Id = new Guid("ae7e5565-74a7-46af-931c-3919b31a26d7"),
-                            DeviceIdentifier = new Guid("e8f8c794-415d-426f-a264-90623f5a61f8"),
+                            Id = new Guid("6fb6da98-62c5-421f-9a21-e71c0c7dc821"),
+                            DeviceIdentifier = new Guid("5306cb47-6c5c-46e5-96ef-704bba535e11"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2401),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(770),
                             UserName = "Reza"
                         },
                         new
                         {
-                            Id = new Guid("ea75c306-b19b-4b54-88e2-d25d500bc2a2"),
-                            DeviceIdentifier = new Guid("fdbbcb91-2761-44db-ac06-e95c49ec0ba5"),
+                            Id = new Guid("7c4b3b2e-90db-41d9-a08b-046632463035"),
+                            DeviceIdentifier = new Guid("86fe9d3b-7d95-402b-8dd4-b87d101bf408"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2403),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(772),
                             UserName = "Maryam"
                         },
                         new
                         {
-                            Id = new Guid("af09f8e0-328a-4663-a250-1584831f3e82"),
-                            DeviceIdentifier = new Guid("00a3cad7-fb9f-4d11-a40d-2ea84b856a70"),
+                            Id = new Guid("83a7b79f-3250-4b55-8fa2-267f13e7bfaa"),
+                            DeviceIdentifier = new Guid("fab59f16-5d35-4bd3-b294-2996de7e291d"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2405),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(774),
                             UserName = "Saeid"
                         },
                         new
                         {
-                            Id = new Guid("b9f8fb7a-8c45-4f20-8eb6-92a7920eb043"),
-                            DeviceIdentifier = new Guid("9eda87ba-a33d-4354-a362-7da220780f7e"),
+                            Id = new Guid("de2b83db-0d80-4c7d-b360-a171c4c6bcac"),
+                            DeviceIdentifier = new Guid("ab2f4cae-bf89-45a2-a38e-63e06bd5c0af"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2407),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(777),
                             UserName = "Saman"
                         },
                         new
                         {
-                            Id = new Guid("66621e0a-63b5-488d-8bab-d1940b3e5e4a"),
-                            DeviceIdentifier = new Guid("f53e964d-5aa2-47b6-a67c-6900b49ea78c"),
+                            Id = new Guid("18bf0830-2bf9-4f2a-a308-264c79226f56"),
+                            DeviceIdentifier = new Guid("023688aa-cd06-4735-9b07-65a6bc73b931"),
                             IsActive = true,
                             IsDeleted = false,
-                            RegisterDate = new DateTime(2022, 12, 22, 15, 18, 0, 64, DateTimeKind.Local).AddTicks(2409),
+                            RegisterDate = new DateTime(2022, 12, 25, 12, 23, 57, 420, DateTimeKind.Local).AddTicks(779),
                             UserName = "Aidin"
                         });
                 });
 
             modelBuilder.Entity("Hermes.Domain.Entities.UserMessage", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("DeviceId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.HasKey("DeviceId");
 
                     b.ToTable("UserMessages");
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b0d608dd-cc8a-4849-b546-92c400d9a8e1"),
-                            UserId = new Guid("1fc1571d-3890-43ed-9392-fe14a721c8f0")
+                            DeviceId = new Guid("49c2ea60-789c-457b-8e03-70c60097d9d5"),
+                            Content = "TestMessage",
+                            Status = false
                         },
                         new
                         {
-                            Id = new Guid("e44327fc-3b8e-4be3-b437-846685f4e056"),
-                            UserId = new Guid("cc2d6986-5d65-47ff-ac28-b03e5ecddd49")
+                            DeviceId = new Guid("aa6588e0-818b-496c-b10f-2f6953bdd46c"),
+                            Content = "TestMessage",
+                            Status = false
                         },
                         new
                         {
-                            Id = new Guid("37af754e-a853-4100-a40a-430659614e74"),
-                            UserId = new Guid("f7eacefa-39aa-4a3e-9cb6-76bec7fa4dff")
+                            DeviceId = new Guid("4610790d-c36b-468f-9894-e80d27d611e8"),
+                            Content = "TestMessage",
+                            Status = false
                         });
                 });
 #pragma warning restore 612, 618

@@ -9,7 +9,8 @@ namespace Hermes.Application.Common
     public enum ErrorMessage
     {
         NotFound,
-        ReminedUsersEmpty
+        ReminedUsersEmpty,
+        UsersEmpty
 
     }
 }

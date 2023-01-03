@@ -15,7 +15,7 @@ namespace Hermes.Persistence.Config
         public void Configure(EntityTypeBuilder<UserMessage> builder)
         {
             builder
-                .HasKey(p => p.Id);
+                .HasKey(p => p.DeviceId);
             
 
         }

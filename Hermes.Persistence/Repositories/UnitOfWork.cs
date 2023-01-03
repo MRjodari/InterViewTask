@@ -24,20 +24,13 @@ namespace Hermes.Persistence.Repositories
 
         public void Dispose()
         {
-             _context.DisposeAsync();
+            _context.DisposeAsync();
         }
 
         public async Task Save()
         {
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
+            await _context.SaveChangesAsync();
 
-                throw;
-            }
         }
     }
 }

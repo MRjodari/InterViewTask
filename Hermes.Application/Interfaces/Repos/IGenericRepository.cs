@@ -10,6 +10,7 @@ namespace Hermes.Application.Interfaces.Repos
     {
         Task<T> GetById(Guid id);
         Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<T>> GetUndeiveredUsers();
         Task<T> Add(T entity);
         Task Update(T entity);
         Task Delete(T entity);

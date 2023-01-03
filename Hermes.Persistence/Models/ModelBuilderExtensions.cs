@@ -53,22 +53,25 @@ namespace Hermes.Persistence.Models
             modelBuilder.Entity<UserMessage>().HasData(
                    new UserMessage
                    {
-                       Id = Guid.NewGuid(),
-                       UserId = guid1
+                       DeviceId = guid1,
+                       Content = "TestMessage",
+                       Status = false
 
                    },
-                   new UserMessage
-                   {
-                       Id = Guid.NewGuid(),
-                       UserId = guid2
+                    new UserMessage
+                    {
+                        DeviceId = guid2,
+                        Content = "TestMessage",
+                        Status = false
 
-                   },
-                   new UserMessage
-                   {
-                       Id = Guid.NewGuid(),
-                       UserId = guid3
+                    },
+                    new UserMessage
+                    {
+                        DeviceId = guid3,
+                        Content = "TestMessage",
+                        Status = false
 
-                   });
+                    });
         }
     }
 }
